@@ -30,7 +30,7 @@ RUN export APP_INSTALL_ARGS="" && \
   echo "{}" > sites/common_site_config.json && \
   find apps -mindepth 1 -path "*/.git" | xargs rm -fr 
 
-RUN  /home/frappe/frappe-bench/env/bin/python -m pip install git+https://{api_key}@github.com/sandesh-bullwork/Bullwork_analytics.git
+RUN  /home/frappe/frappe-bench/env/bin/python -m pip install git+https://${API_KEY}@github.com/sandesh-bullwork/Bullwork_analytics.git
 
 FROM frappe/base:${FRAPPE_BRANCH} AS backend
 
