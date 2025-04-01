@@ -12,9 +12,8 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
-#        user: 1001:1001
         source: ./json_files
-        target: /home/frappe/frappe-bench/sites/prod_analytics9/public/files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
 
     environment:
       DB_HOST: db
@@ -25,7 +24,7 @@ services:
   configurator:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     networks:
-      - frappe_network
+      - frappe_network1
     deploy:
       restart_policy:
         condition: none
@@ -52,12 +51,12 @@ services:
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
         source: ./json_files
-        target: /home/frappe/frappe-bench/sites/prod_analytics9/public/files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
 
   create-site:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     networks:
-      - frappe_network
+      - frappe_network1
     deploy:
       restart_policy:
         condition: none
@@ -66,7 +65,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
         source: ./json_files
-        target: /home/frappe/frappe-bench/sites/prod_analytics9/public/files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
 
     entrypoint:
       - bash
@@ -89,12 +88,12 @@ services:
           fi
         done;
         echo "sites/common_site_config.json found";
-        bench new-site --mariadb-user-host-login-scope='%' --admin-password=admin --db-root-username=root --db-root-password=admin --install-app erpnext --set-default prod_analytics8;
+        bench new-site --mariadb-user-host-login-scope='%' --admin-password=admin --db-root-username=root --db-root-password=admin --install-app erpnext --set-default ${SITE_NAME};
 
   db:
     image: mariadb:10.6
     networks:
-      - frappe_network
+      - frappe_network1
     healthcheck:
       test: mysqladmin ping -h localhost --password=admin
       interval: 1s
@@ -116,7 +115,7 @@ services:
   frontend:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     networks:
-      - frappe_network
+      - frappe_network1
     depends_on:
       - websocket
     deploy:
@@ -126,7 +125,7 @@ services:
       - nginx-entrypoint.sh
     environment:
       BACKEND: backend:8000
-      FRAPPE_SITE_NAME_HEADER: prod_analytics9
+      FRAPPE_SITE_NAME_HEADER: ${SITE_NAME}
       SOCKETIO: websocket:9000
       UPSTREAM_REAL_IP_ADDRESS: 127.0.0.1
       UPSTREAM_REAL_IP_HEADER: X-Forwarded-For
@@ -139,7 +138,7 @@ services:
       - type: bind
  #       user: 1001:1001
         source: ./json_files
-        target: /home/frappe/frappe-bench/sites/prod_analytics9/public/files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
 
     ports:
       - "9091:8080"
@@ -147,7 +146,7 @@ services:
   queue-long:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     networks:
-      - frappe_network
+      - frappe_network1
     deploy:
       restart_policy:
         condition: on-failure
@@ -161,7 +160,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
         source: ./json_files
-        target: /home/frappe/frappe-bench/sites/prod_analytics9/public/files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
   queue-short:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     networks:
@@ -179,12 +178,12 @@ services:
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
         source: ./json_files
-        target: /home/frappe/frappe-bench/sites/prod_analytics9/public/files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
 
   redis-queue:
     image: redis:6.2-alpine
     networks:
-      - frappe_network
+      - frappe_network1
     deploy:
       restart_policy:
         condition: on-failure
@@ -194,7 +193,7 @@ services:
   redis-cache:
     image: redis:6.2-alpine
     networks:
-      - frappe_network
+      - frappe_network1
     deploy:
       restart_policy:
         condition: on-failure
@@ -204,7 +203,7 @@ services:
   scheduler:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     networks:
-      - frappe_network
+      - frappe_network1
     deploy:
       restart_policy:
         condition: on-failure
@@ -216,11 +215,11 @@ services:
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
         source: ./json_files
-        target: /home/frappe/frappe-bench/sites/prod_analytics9/public/files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
   websocket:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     networks:
-      - frappe_network
+      - frappe_network1
     deploy:
       restart_policy:
         condition: on-failure
@@ -232,10 +231,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
         source: ./json_files
-        target: /home/frappe/frappe-bench/sites/prod_analytics9/public/files
-#      - type:
-#        source: ./backup
-#        target: /home/frappe/frappe-bench/sites/prod_analytics/private
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
 
 volumes:
   db-data:
