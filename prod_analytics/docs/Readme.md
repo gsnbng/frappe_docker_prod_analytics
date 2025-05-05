@@ -54,7 +54,7 @@ Updating the existing production site:
 
       NOTE: Only private files are restored since the public files are mapped to the directory in host system
       
-    /private/files/20250130_132415-prod_analytics5-private-files.t
+  
       
     
 
