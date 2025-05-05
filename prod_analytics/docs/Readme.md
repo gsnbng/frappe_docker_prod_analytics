@@ -5,7 +5,18 @@
 
 ## Creating Docker Image
 
-### Step 1: Export the `apps.json` File
+### Step 1: Clone the Repository
+1. Clone the `frappe_docker_prod_analytics` repository:
+   ```bash
+   git clone https://github.com/gsnbng/frappe_docker_prod_analytics.git
+   ```
+2. Navigate to the `prod_analytics` directory:
+   ```bash
+   cd frappe_docker_prod_analytics/prod_analytics
+   ```
+
+---
+### Step 2: Export the `apps.json` File
 1. Export the `apps.json` file as a base64-encoded string:
    ```bash
    export APPS_JSON_BASE64=$(base64 -w 0 /path/to/apps.json)
@@ -17,19 +28,6 @@
 3. Open the `apps-test-output.json` file to review and ensure the JSON content is correct.
 
 ---
-
-### Step 2: Clone the Repository
-1. Clone the `frappe_docker_prod_analytics` repository:
-   ```bash
-   git clone https://github.com/gsnbng/frappe_docker_prod_analytics.git
-   ```
-2. Navigate to the `prod_analytics` directory:
-   ```bash
-   cd frappe_docker_prod_analytics/prod_analytics
-   ```
-
----
-
 ### Step 3: Build the Docker Image
 Use the following command to build the Docker image:
 ```bash
@@ -123,7 +121,7 @@ This guide provides detailed instructions for creating a Docker image and updati
 
 --- 
 
-Let me know if you’d like further refinements or additional details!
+
     
 
 
