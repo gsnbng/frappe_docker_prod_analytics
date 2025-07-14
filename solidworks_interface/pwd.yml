@@ -5,7 +5,7 @@ services:
     image: ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     pull_policy: never
     networks:
-      - frappe_network1
+      - frappe_network2
     deploy:
       restart_policy:
         condition: on-failure
@@ -27,7 +27,7 @@ services:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     pull_policy: never
     networks:
-      - frappe_network1
+      - frappe_network2
     deploy:
       restart_policy:
         condition: none
@@ -60,7 +60,7 @@ services:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     pull_policy: never
     networks:
-      - frappe_network1
+      - frappe_network2
     deploy:
       restart_policy:
         condition: none
@@ -97,7 +97,7 @@ services:
   db:
     image: mariadb:10.6
     networks:
-      - frappe_network1
+      - frappe_network2
     healthcheck:
       test: mysqladmin ping -h localhost --password=admin
       interval: 1s
@@ -120,7 +120,7 @@ services:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     pull_policy: never
     networks:
-      - frappe_network1
+      - frappe_network2
     depends_on:
       - websocket
     deploy:
@@ -151,7 +151,7 @@ services:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     pull_policy: never
     networks:
-      - frappe_network1
+      - frappe_network2
     deploy:
       restart_policy:
         condition: on-failure
@@ -170,7 +170,7 @@ services:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     pull_policy: never
     networks:
-      - frappe_network1
+      - frappe_network2
     deploy:
       restart_policy:
         condition: on-failure
@@ -189,7 +189,7 @@ services:
   redis-queue:
     image: redis:6.2-alpine
     networks:
-      - frappe_network1
+      - frappe_network2
     deploy:
       restart_policy:
         condition: on-failure
@@ -199,7 +199,7 @@ services:
   redis-cache:
     image: redis:6.2-alpine
     networks:
-      - frappe_network1
+      - frappe_network2
     deploy:
       restart_policy:
         condition: on-failure
@@ -210,7 +210,7 @@ services:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     pull_policy: never
     networks:
-      - frappe_network1
+      - frappe_network2
     deploy:
       restart_policy:
         condition: on-failure
@@ -227,7 +227,7 @@ services:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     pull_policy: never
     networks:
-      - frappe_network1
+      - frappe_network2
     deploy:
       restart_policy:
         condition: on-failure
@@ -250,5 +250,5 @@ volumes:
   logs:
 
 networks:
-  frappe_network1:
+  frappe_network2:
     driver: bridge
