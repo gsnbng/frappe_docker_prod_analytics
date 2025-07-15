@@ -14,8 +14,8 @@ services:
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
 
-        source: ./json_files
-        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
+        source: ./dxf_files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME1}/public/files
 
     environment:
       DB_HOST: db
@@ -53,8 +53,8 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
-        source: ./json_files
-        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
+        source: ./dxf_files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME1}/public/files
 
   create-site:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
@@ -68,8 +68,8 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
-        source: ./json_files
-        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
+        source: ./dxf_files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME1}/public/files
 
     entrypoint:
       - bash
@@ -92,7 +92,7 @@ services:
           fi
         done;
         echo "sites/common_site_config.json found";
-        bench new-site --mariadb-user-host-login-scope='%' --admin-password=admin --db-root-username=root --db-root-password=admin --install-app erpnext --set-default ${SITE_NAME};
+        bench new-site --mariadb-user-host-login-scope='%' --admin-password=admin --db-root-username=root --db-root-password=admin --install-app erpnext --set-default ${SITE_NAME1};
 
   db:
     image: mariadb:10.6
@@ -130,7 +130,7 @@ services:
       - nginx-entrypoint.sh
     environment:
       BACKEND: backend:8000
-      FRAPPE_SITE_NAME_HEADER: ${SITE_NAME}
+      FRAPPE_SITE_NAME1_HEADER: ${SITE_NAME1}
       SOCKETIO: websocket:9000
       UPSTREAM_REAL_IP_ADDRESS: 127.0.0.1
       UPSTREAM_REAL_IP_HEADER: X-Forwarded-For
@@ -141,8 +141,8 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
-         source: ./json_files
-        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
+         source: ./dxf_files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME1}/public/files
 
     ports:
       - "9091:8080"
@@ -164,8 +164,8 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
-        source: ./json_files
-        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
+        source: ./dxf_files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME1}/public/files
   queue-short:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     pull_policy: never
@@ -183,8 +183,8 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
-        source: ./json_files
-        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
+        source: ./dxf_files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME1}/public/files
 
   redis-queue:
     image: redis:6.2-alpine
@@ -221,14 +221,15 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
-        source: ./json_files
-        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
+        source: ./dxf_files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME1}/public/files
   websocket:
     image:  ${CUSTOM_IMAGE}:${CUSTOM_TAG}
     pull_policy: never
     networks:
       - frappe_network1
     deploy:
+
       restart_policy:
         condition: on-failure
     command:
@@ -238,8 +239,8 @@ services:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
       - type: bind
-        source: ./json_files
-        target: /home/frappe/frappe-bench/sites/${SITE_NAME}/public/files
+        source: ./dxf_files
+        target: /home/frappe/frappe-bench/sites/${SITE_NAME1}/public/files
 
 
 volumes:
