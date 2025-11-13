@@ -13,7 +13,8 @@
   },
 
  {
-    "url": "https://${GITHUB_API_KEY}@github.com/gsnbng/solidworks_interface.git",
-    "branch": "develop"
+    "url": "https://${GITHUB_API_KEY}@github.com/gsnbng/asset_valuation.git",
+    "branch": "main"
   }
 ]
+
