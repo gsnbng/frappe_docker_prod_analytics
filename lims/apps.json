@@ -13,7 +13,7 @@
   },
 
  {
-    "url": "https://${GITHUB_API_KEY}@github.com/gsnbng/solidworks_interface.git",
+    "url": "https://${GITHUB_API_KEY}@github.com/gsnbng/LIMS.git",
     "branch": "develop"
   }
 ]
