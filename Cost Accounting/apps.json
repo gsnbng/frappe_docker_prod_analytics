@@ -13,7 +13,7 @@
   },
 
  {
-    "url": "https://${GITHUB_API_KEY}@github.com/gsnbng/press.git",
-    "branch": "feature/docker-host-management"
+    "url": "https://${GITHUB_API_KEY}@github.com/gsnbng/Cost-Accounting.git",
+    "branch": "main"
   }
 ]
