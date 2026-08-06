@@ -1,0 +1,19 @@
+[
+  {
+    "url": "https://github.com/frappe/erpnext",
+    "branch": "version-15"
+  },
+  {
+    "url": "https://github.com/frappe/payments",
+    "branch": "version-15"
+  },
+ {
+    "url": "https://github.com/frappe/hrms",
+    "branch": "version-15"
+  },
+
+ {
+    "url": "https://${GITHUB_API_KEY}@github.com/gsnbng/press.git",
+    "branch": "feature/docker-host-management"
+  }
+]
