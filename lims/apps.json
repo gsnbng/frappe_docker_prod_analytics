@@ -14,6 +14,12 @@
 
  {
     "url": "https://${GITHUB_API_KEY}@github.com/gsnbng/LIMS.git",
-    "branch": "develop"
+     "commit_hash": "86efba66d595f3e40f3d0dab87c81547f8c75de8",
+    "branch": "feature/physical_lab"
+  },
+{
+    "url": "https://${GITHUB_API_KEY}@github.com/gsnbng/frappe_whatsapp.git",
+
+    "branch": "master"
   }
 ]
